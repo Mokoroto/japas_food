@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
 
@@ -10,10 +9,10 @@ class LoginView extends StatefulWidget {
 }
 
 class _LogarState extends State<LoginView> {
-  FirebaseAuth auth =  FirebaseAuth.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
   String email = '';
   String senha = '';
-  
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -27,7 +26,7 @@ class _LogarState extends State<LoginView> {
             children: [
               Image.asset('images/logo_japas_food.jpeg'),
               TextField(
-                onChanged: (text){
+                onChanged: (text) {
                   email = text;
                 },
                 keyboardType: TextInputType.emailAddress,
@@ -40,7 +39,7 @@ class _LogarState extends State<LoginView> {
                 height: 10,
               ),
               TextField(
-                onChanged: (text){
+                onChanged: (text) {
                   senha = text;
                 },
                 obscureText: true,
@@ -49,28 +48,32 @@ class _LogarState extends State<LoginView> {
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 10,),
-              
+              SizedBox(
+                height: 10,
+              ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    Text('Não possui cadastro?'),
-                    TextButton(onPressed: () {
-                      Navigator.of(context).pushNamed('/cadastro');
-                    }, child: Text('Cadastre-se'))
-                  ],
-                ),
-                  ElevatedButton(onPressed: () {
-                    auth.signInWithEmailAndPassword(email: email, password: senha);
-                    Navigator.of(context).pushNamed('/perfil');
-                  },
+                children: [
+                  Row(
+                    children: [
+                      const Text('Não possui cadastro?'),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/cadastro');
+                        },
+                        child: const Text('Cadastre-se'),
+                      ),
+                    ],
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      auth.signInWithEmailAndPassword(
+                          email: email, password: senha);
+                      Navigator.of(context).pushNamed('/perfil');
+                    },
                     child: Text('Entrar'),
-
-                ),
-                
+                  ),
                 ],
               ),
             ],
