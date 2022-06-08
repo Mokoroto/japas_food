@@ -40,6 +40,28 @@
   <script src="flutter.js" defer></script>
 </head>
 <body>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyDoETl-DSAHirpVrAk5b2EEfl4jxZpb06c",
+      authDomain: "japas-food.firebaseapp.com",
+      projectId: "japas-food",
+      storageBucket: "japas-food.appspot.com",
+      messagingSenderId: "512380894229",
+      appId: "1:512380894229:web:603c29208e8882fc38a21c",
+      measurementId: "G-LW08XBJFQD"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    
+  </script>
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:japas_food/View/perfil.view.dart';
 
 
-import 'logar.view.dart';
+import 'cadastro.view.dart';
 import 'login.view.dart';
 
 
@@ -15,12 +15,13 @@ class App extends StatelessWidget {
 
     return MaterialApp(
       routes: {
-        '/': (context) => LogarView(),
+        '/': (context) => LoginView(),
         '/perfil': (context) => PerfilView(),
+        '/cadastro': (context) => CadastroView(),
         //'/register': (context) => RegisterView(),
         //'/conversa': (context) => ChatView()
       },
-      initialRoute: auth.currentUser == null ? '/' : '/login'
+      initialRoute: auth.currentUser == null ? '/' : '/perfil'
     );
   }
 }
