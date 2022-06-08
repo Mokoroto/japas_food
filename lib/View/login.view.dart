@@ -22,8 +22,8 @@ class _LogarState extends State<LoginView> {
         height: double.infinity,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset('images/logo_japas_food.jpeg'),
               TextField(
