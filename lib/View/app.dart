@@ -5,6 +5,7 @@ import 'package:japas_food/View/perfil.view.dart';
 
 import 'cadastro.view.dart';
 import 'login.view.dart';
+import 'menu.view.dart';
 
 
 class App extends StatelessWidget {
@@ -18,10 +19,9 @@ class App extends StatelessWidget {
         '/': (context) => LoginView(),
         '/perfil': (context) => PerfilView(),
         '/cadastro': (context) => CadastroView(),
-        //'/register': (context) => RegisterView(),
-        //'/conversa': (context) => ChatView()
+        '/menu': (context) => MenuView(),
       },
-      initialRoute: auth.currentUser == null ? '/' : '/perfil'
+      initialRoute: auth.currentUser == null ? '/' : '/menu'
     );
   }
 }

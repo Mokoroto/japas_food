@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "512380894229",
+    "project_id": "japas-food",
+    "storage_bucket": "japas-food.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512380894229:android:046c9654b63f234038a21c",
+        "android_client_info": {
+          "package_name": "com.flutterflow.japasfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512380894229-d6o48pdasutmv1fkqkgiegdp32uvdo7b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutterflow.japasfood",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "512380894229-d7562kcmq9mq5mre2ej9mlfm65s7r5ld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx2fu6PL4hVKGM71LCvUV22hre-Sf_ORo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512380894229-d7562kcmq9mq5mre2ej9mlfm65s7r5ld.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "512380894229-34p1g25stsf7ktspigldaji0mqsej0po.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.japasfood"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

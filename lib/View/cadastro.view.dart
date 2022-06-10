@@ -65,14 +65,21 @@ class _CadastroViewState extends State<CadastroView> {
       body: Form(
         key: formKey,
         child: Container(
-          color: const Color.fromARGB(150, 4, 0, 255),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 245, 233, 66),
+                Color.fromARGB(122, 63, 226, 255),
+              ],
+            ),
+            ),
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 SizedBox(
                   height: 500,
                   width: 450,
-                  child: Image.asset('images/logo_japas_food.jpeg'),
+                  child: Image.asset('images/LOGO.png'),
                 ),
                 Container(
                   margin: EdgeInsets.only(

@@ -9,14 +9,43 @@ class LoginView extends StatefulWidget {
 }
 
 class _LogarState extends State<LoginView> {
+  /*String erro = '';
+  void _handleFirebaseLoginWithCredentialsException(
+      FirebaseAuthException e, StackTrace s) {
+    if (e.code == 'user-disabled') {
+      //'O usuário informado está desabilitado.'
+      erro = 'Usuário desabilitado no sistema';
+    } else if (e.code == 'user-not-found') {
+      //'O usuário informado não está cadastrado.'
+      erro = 'Usuário não cadastrado no sistema';
+    } else if (e.code == 'invalid-email') {
+      //'O domínio do e-mail informado é inválido.'
+      erro = 'Email ou senha invalido';
+    } else if (e.code == 'wrong-password') {
+      //'A senha informada está incorreta.'
+      erro = 'Email ou senha invalido';
+    } else {
+      erro = 'Entre em contato com o administrador do sistema';
+    }
+  }*/
   FirebaseAuth auth = FirebaseAuth.instance;
   String email = '';
   String senha = '';
+  //final emailController = TextEditingController();
+  //final senhaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: SizedBox(
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 245, 233, 66),
+              Color.fromARGB(122, 63, 226, 255),
+            ],
+          ),
+        ),
         width: double.infinity,
         height: double.infinity,
         child: Padding(
@@ -24,7 +53,7 @@ class _LogarState extends State<LoginView> {
           child: ListView(
             // mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('images/logo_japas_food.jpeg'),
+              Image.asset('images/LOGO.png'),
               TextField(
                 onChanged: (text) {
                   email = text;
@@ -67,13 +96,33 @@ class _LogarState extends State<LoginView> {
                     ],
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      auth.signInWithEmailAndPassword(
-                          email: email, password: senha);
-                      Navigator.of(context).pushNamed('/perfil');
-                    },
-                    child: Text('Entrar'),
-                  ),
+                      child: Text('Entrar'),
+                      onPressed: () {
+                        login(String email, String senha,
+                            BuildContext context) async {
+                          try {
+                            await auth.signInWithEmailAndPassword(
+                                email: email, password: senha);
+                            Navigator.of(context).pushNamed('/menu');
+                          } on FirebaseAuthException catch (e) {
+                            if (e.code == 'user-not-found') {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                      'Usuário não foi encontrado. Por favor realize o cadastro'),
+                                ),
+                              );
+                            } else if (e.code == 'wrong-password') {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                      'Email ou senha incorretos! Tente novamente.'),
+                                ),
+                              );
+                            }
+                          }
+                        }
+                      }),
                 ],
               ),
             ],
