@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -9,39 +10,31 @@ class MenuView extends StatefulWidget {
 }
 
 class _MenuViewState extends State<MenuView> {
-    FirebaseAuth auth = FirebaseAuth.instance;
-    
+  FirebaseAuth auth = FirebaseAuth.instance;
+  final firestore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Container(
-        decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                Color.fromARGB(255, 245, 233, 66),
-                Color.fromARGB(22, 63, 226, 255),
-              ],
-            ),
-          ),
-          width: double.infinity,
-          height: double.infinity,
-          child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView(
-            children: [
-              Image.asset('images/LOGO.png'),
-              Scaffold(
-                floatingActionButton: FloatingActionButton(
-                  child: Icon(Icons.logout),
-                  onPressed: (){
-                    auth.signOut();
-                    Navigator.of(context).pushReplacementNamed('/');
-                  },
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("menu"),
+      ),
+      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+        stream: firestore.collection("Produto").snapshots(),
+        builder: (_, snapshot) {
+          if (!snapshot.hasData) return const CircularProgressIndicator();
+          return ListView.builder(
+            itemCount: snapshot.data?.docs.length,
+            itemBuilder: (_, index) {
+              return Container(
+                child: ListTile(
+                  title: Text(snapshot.data!.docs[index]["nome"]),
+                  subtitle: Text(snapshot.data!.docs[index]["descricao"]),
                 ),
-              ),
-            ],
-          ),
-        ),
+              );
+            },
+          );
+        },
       ),
     );
   }
