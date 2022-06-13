@@ -9,25 +9,6 @@ class LoginView extends StatefulWidget {
 }
 
 class _LogarState extends State<LoginView> {
-  /*String erro = '';
-  void _handleFirebaseLoginWithCredentialsException(
-      FirebaseAuthException e, StackTrace s) {
-    if (e.code == 'user-disabled') {
-      //'O usuário informado está desabilitado.'
-      erro = 'Usuário desabilitado no sistema';
-    } else if (e.code == 'user-not-found') {
-      //'O usuário informado não está cadastrado.'
-      erro = 'Usuário não cadastrado no sistema';
-    } else if (e.code == 'invalid-email') {
-      //'O domínio do e-mail informado é inválido.'
-      erro = 'Email ou senha invalido';
-    } else if (e.code == 'wrong-password') {
-      //'A senha informada está incorreta.'
-      erro = 'Email ou senha invalido';
-    } else {
-      erro = 'Entre em contato com o administrador do sistema';
-    }
-  }*/
   FirebaseAuth auth = FirebaseAuth.instance;
   String email = '';
   String senha = '';
@@ -98,12 +79,17 @@ class _LogarState extends State<LoginView> {
                   ElevatedButton(
                       child: Text('Entrar'),
                       onPressed: () {
-                        login(String email, String senha,
-                            BuildContext context) async {
-                          try {
-                            await auth.signInWithEmailAndPassword(
+                        print(email);
+                        print(senha);
+
+                            auth.signInWithEmailAndPassword(
                                 email: email, password: senha);
+
                             Navigator.of(context).pushNamed('/menu');
+
+                        login(String email, String senha) async {
+                          try {
+                            // ignore: use_build_context_synchronously
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'user-not-found') {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -122,7 +108,8 @@ class _LogarState extends State<LoginView> {
                             }
                           }
                         }
-                      }),
+                      },
+                    ),
                 ],
               ),
             ],

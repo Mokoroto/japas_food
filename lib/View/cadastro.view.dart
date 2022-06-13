@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:japas_food/View/menu.view.dart';
 import 'package:japas_food/View/perfil.view.dart';
 
 class CadastroView extends StatefulWidget {
@@ -49,7 +50,7 @@ class _CadastroViewState extends State<CadastroView> {
       });
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => const PerfilView(),
+          builder: (context) => const MenuView(),
         ),
       );
     } else {
