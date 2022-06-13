@@ -11,13 +11,41 @@ class MenuView extends StatefulWidget {
 
 class _MenuViewState extends State<MenuView> {
   FirebaseAuth auth = FirebaseAuth.instance;
+  int _selectedIndex = 0;
   final firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+             label: 'Cardápio',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_sharp),
+             label: 'Perfil',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_home_sharp),
+             label: 'Endereco',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.logout),
+             label: 'Sair',
+          ),
+        ],
+        unselectedItemColor: Colors.black,
+        selectedItemColor: Colors.amber[900],
+        selectedFontSize: 20,
+        unselectedFontSize: 16,
+        currentIndex: _selectedIndex,
+        onTap: _onTappedItem,
+      ),
       appBar: AppBar(
         title: const Text("menu"),
+        
       ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: firestore.collection("Produto").snapshots(),
@@ -37,5 +65,11 @@ class _MenuViewState extends State<MenuView> {
         },
       ),
     );
+  }
+
+  void _onTappedItem(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }

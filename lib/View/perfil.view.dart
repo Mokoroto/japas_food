@@ -14,6 +14,8 @@ class _PerfilViewState extends State<PerfilView> {
   String nome = '';
   String email = '';
   String telefone = '';
+  
+  int _selectedIndex = 1;
   void carregausuario()async{
     FirebaseAuth auth = FirebaseAuth.instance;
     FirebaseFirestore db = FirebaseFirestore.instance;
@@ -25,16 +27,42 @@ class _PerfilViewState extends State<PerfilView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Text('Hello'),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+             label: 'Cardápio',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_sharp),
+             label: 'Perfil',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_home_sharp),
+             label: 'Endereco',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.logout),
+             label: 'Sair',
+          ),
+        ],
+        unselectedItemColor: Colors.black,
+        selectedItemColor: Colors.amber[900],
+        selectedFontSize: 20,
+        unselectedFontSize: 16,
+        currentIndex: _selectedIndex,
+        onTap: _onTappedItem,
       ),
-      
-      
-    );
+      appBar: AppBar(
+        title: const Text("Perfil"),
+        
+      ),
+      );
   }
-  void initState(){
-    super.initState();
-    carregausuario();
+  void _onTappedItem(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
   
 }
