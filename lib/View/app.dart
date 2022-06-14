@@ -17,8 +17,8 @@ class App extends StatelessWidget {
 
     return MaterialApp(
       routes: {
-        '/': (context) => PerfilView(),
-        //'/perfil': (context) => PerfilView(),
+        '/': (context) => LoginView(),
+        '/perfil': (context) => PerfilView(),
         '/cadastro': (context) => CadastroView(),
         '/menu': (context) => MenuView(),
       },

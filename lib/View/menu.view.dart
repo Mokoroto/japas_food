@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:japas_food/View/perfil.view.dart';
 
 class MenuView extends StatefulWidget {
   const MenuView({Key? key}) : super(key: key);
@@ -53,7 +55,7 @@ class _MenuViewState extends State<MenuView> {
         title: const Text("menu"),
         
       ),
-      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+      body: _selectedIndex == 0 ? StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: firestore.collection("Produto").snapshots(),
         builder: (_, snapshot) {
           if (!snapshot.hasData) return const CircularProgressIndicator();
@@ -69,7 +71,11 @@ class _MenuViewState extends State<MenuView> {
             },
           );
         },
-      ),
+      ) : _selectedIndex == 1 ? PerfilView() : 
+      _selectedIndex == 2 ? Text("Endereço") : ElevatedButton(onPressed: () {
+        auth.signOut();
+        Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+      }, child: Text("Sair"))
     );
   }
 
