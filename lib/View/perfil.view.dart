@@ -16,16 +16,14 @@ class _PerfilViewState extends State<PerfilView> {
   String? telefone = '';
   FirebaseAuth auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
-  
+
   int _selectedIndex = 1;
-  void carregausuario()async{
+  void carregausuario() async {
     FirebaseAuth auth = FirebaseAuth.instance;
     FirebaseFirestore db = FirebaseFirestore.instance;
     var user = auth.currentUser!;
     var usuario = await db.collection('usuarios').doc(user.uid).get();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -58,32 +56,74 @@ class _PerfilViewState extends State<PerfilView> {
       // ),
       // appBar: AppBar(
       //   title: const Text("Perfil"),
-        
+
       // ),
-      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: firestore.collection("usuarios").snapshots(),
-        builder: (_, snapshot) {
-          if (!snapshot.hasData) return const CircularProgressIndicator();
-          return ListView.builder(
-            itemCount: snapshot.data?.docs.length,
-            itemBuilder: (_, index) {
-              return Container(
-                child: ListTile(
-                  title: Text(snapshot.data!.docs[index]["nome"]),
-                  subtitle: Text(snapshot.data!.docs[index]["telefone"]),
-                  //subtitle: Text(snapshot.data!.docs[index]["email"]),
+      body: Column(
+        children: [
+          StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+            stream: firestore
+                .collection("usuarios")
+                .where("uid", isEqualTo: auth.currentUser!.uid)
+                .snapshots(),
+            builder: (_, snapshot) {
+              if (!snapshot.hasData) return const CircularProgressIndicator();
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: snapshot.data?.docs.length,
+                itemBuilder: (_, index) {
+                  return ListTile(
+                    title: Text(snapshot.data!.docs[index]["nome"]),
+                    subtitle: Text(snapshot.data!.docs[index]["telefone"]),
+                    //subtitle: Text(snapshot.data!.docs[index]["email"]),
+                  );
+                },
+              );
+            },
+          ),
+          StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+            stream: firestore
+                .collection("usuarios")
+                .doc(auth.currentUser!.uid)
+                .collection("enderecos")
+                .snapshots(),
+            builder: (_, snapshot) {
+              if (!snapshot.hasData)
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: snapshot.data?.docs.length,
+                  itemBuilder: (_, index) {
+                    return Container(
+                        child: Column(
+                      children: [
+                        Text(
+                          snapshot.data!.docs[index]["cep"],
+                        ),
+                        Text(
+                          snapshot.data!.docs[index]["rua"] +
+                              ", " +
+                              snapshot.data!.docs[index]["numero"],
+                        ),
+                        Text(
+                          snapshot.data!.docs[index]["bairro"],
+                        ),
+                      ],
+                    ));
+                  },
                 ),
               );
             },
-          );
-        },
+          )
+        ],
       ),
-      );
+    );
   }
+
   void _onTappedItem(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-  
 }
