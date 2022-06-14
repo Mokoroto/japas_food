@@ -16,6 +16,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => LoginView(),
         '/perfil': (context) => PerfilView(),
