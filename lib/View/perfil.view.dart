@@ -11,9 +11,11 @@ class PerfilView extends StatefulWidget {
 }
 
 class _PerfilViewState extends State<PerfilView> {
-  String nome = '';
-  String email = '';
-  String telefone = '';
+  String? nome = '';
+  String? email = '';
+  String? telefone = '';
+  FirebaseAuth auth = FirebaseAuth.instance;
+  final firestore = FirebaseFirestore.instance;
   
   int _selectedIndex = 1;
   void carregausuario()async{
@@ -22,6 +24,7 @@ class _PerfilViewState extends State<PerfilView> {
     var user = auth.currentUser!;
     var usuario = await db.collection('usuarios').doc(user.uid).get();
   }
+
 
 
   @override
@@ -56,6 +59,24 @@ class _PerfilViewState extends State<PerfilView> {
       appBar: AppBar(
         title: const Text("Perfil"),
         
+      ),
+      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+        stream: firestore.collection("usuarios").snapshots(),
+        builder: (_, snapshot) {
+          if (!snapshot.hasData) return const CircularProgressIndicator();
+          return ListView.builder(
+            itemCount: snapshot.data?.docs.length,
+            itemBuilder: (_, index) {
+              return Container(
+                child: ListTile(
+                  title: Text(snapshot.data!.docs[index]["nome"]),
+                  subtitle: Text(snapshot.data!.docs[index]["telefone"]),
+                  //subtitle: Text(snapshot.data!.docs[index]["email"]),
+                ),
+              );
+            },
+          );
+        },
       ),
       );
   }

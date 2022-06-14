@@ -6,6 +6,7 @@ import 'package:japas_food/View/perfil.view.dart';
 import 'cadastro.view.dart';
 import 'login.view.dart';
 import 'menu.view.dart';
+import 'perfil.view.dart';
 
 
 class App extends StatelessWidget {
@@ -16,8 +17,8 @@ class App extends StatelessWidget {
 
     return MaterialApp(
       routes: {
-        '/': (context) => LoginView(),
-        '/perfil': (context) => PerfilView(),
+        '/': (context) => PerfilView(),
+        //'/perfil': (context) => PerfilView(),
         '/cadastro': (context) => CadastroView(),
         '/menu': (context) => MenuView(),
       },

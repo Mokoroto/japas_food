@@ -12,8 +12,6 @@ class _LogarState extends State<LoginView> {
   FirebaseAuth auth = FirebaseAuth.instance;
   String email = '';
   String senha = '';
-  //final emailController = TextEditingController();
-  //final senhaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -77,39 +75,37 @@ class _LogarState extends State<LoginView> {
                     ],
                   ),
                   ElevatedButton(
-                      child: Text('Entrar'),
-                      onPressed: () {
-                        print(email);
-                        print(senha);
+                    child: Text('Entrar'),
+                    onPressed: () {
 
-                            auth.signInWithEmailAndPassword(
-                                email: email, password: senha);
+                      // login(String email, String senha) async {
+                        try {
+                      print(email);
+                      print(senha);
+                          auth.signInWithEmailAndPassword(
+                              email: email, password: senha);
 
-                            Navigator.of(context).pushNamed('/menu');
-
-                        login(String email, String senha) async {
-                          try {
-                            // ignore: use_build_context_synchronously
-                          } on FirebaseAuthException catch (e) {
-                            if (e.code == 'user-not-found') {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                      'Usuário não foi encontrado. Por favor realize o cadastro'),
-                                ),
-                              );
-                            } else if (e.code == 'wrong-password') {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                      'Email ou senha incorretos! Tente novamente.'),
-                                ),
-                              );
-                            }
+                          Navigator.of(context).pushNamed('/menu');
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'user-not-found') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                    'Usuário não foi encontrado. Por favor realize o cadastro'),
+                              ),
+                            );
+                          } else if (e.code == 'wrong-password') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                    'Email ou senha incorretos! Tente novamente.'),
+                              ),
+                            );
                           }
                         }
-                      },
-                    ),
+                      // }
+                    },
+                  ),
                 ],
               ),
             ],

@@ -13,6 +13,12 @@ class _MenuViewState extends State<MenuView> {
   FirebaseAuth auth = FirebaseAuth.instance;
   int _selectedIndex = 0;
   final firestore = FirebaseFirestore.instance;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    
+  ];
+
 
   @override
   Widget build(BuildContext context) {
