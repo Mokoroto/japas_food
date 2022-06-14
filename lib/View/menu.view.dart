@@ -23,6 +23,14 @@ class _MenuViewState extends State<MenuView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(onPressed: () {
+            Column(children: [
+              ElevatedButton(onPressed: () {
+                  
+              }, child: Text('Combinado'))
+            ],
+          );
+        }, child: Icon(Icons.shopping_cart),),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -49,13 +57,20 @@ class _MenuViewState extends State<MenuView> {
           currentIndex: _selectedIndex,
           onTap: _onTappedItem,
         ),
+
+//♥
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: _selectedIndex == 0
-              ? Text("menu")
+              ? Text("Menu")
               : _selectedIndex == 1
-                  ? Text("Conta")
-                  : Text("Endereço"),
+                  ? Text("Perfil")
+                  : _selectedIndex == 2
+                  ? Text("Endereço")
+                  : Text("Sair")
         ),
+
+
         body: _selectedIndex == 0
             ? StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                 stream: firestore.collection("Produto").snapshots(),
@@ -67,10 +82,11 @@ class _MenuViewState extends State<MenuView> {
                     itemBuilder: (_, index) {
                       return Container(
                         child: ListTile(
-                          title: Text(snapshot.data!.docs[index]["nome"]),
-                          subtitle:
-                              Text(snapshot.data!.docs[index]["descricao"]),
-                        ),
+                              title: Text(snapshot.data!.docs[index]["nome"]),
+                              subtitle:
+                                  Text(snapshot.data!.docs[index]["descricao"]),
+                            ),
+
                       );
                     },
                   );
@@ -86,7 +102,9 @@ class _MenuViewState extends State<MenuView> {
                           Navigator.of(context).pushNamedAndRemoveUntil(
                               '/', (Route<dynamic> route) => false);
                         },
-                        child: Text("Sair")));
+                        child: Text("Sair")
+        ),
+      );
   }
 
   void _onTappedItem(int index) {
