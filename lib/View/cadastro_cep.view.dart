@@ -20,6 +20,7 @@ class CepView extends StatefulWidget {
 }
 
 class _CepViewState extends State<CepView> {
+  int _selectedIndex = 2;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String endereco = "";
   final txtCepController = TextEditingController();
