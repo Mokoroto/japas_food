@@ -58,6 +58,7 @@ class _CepViewState extends State<CepView> {
       children: [
         TextField(
             controller: txtController,
+            decoration: InputDecoration(labelText: 'CEP'),
           ),
           ElevatedButton(
             onPressed: consulta,
@@ -69,15 +70,20 @@ class _CepViewState extends State<CepView> {
             children: [
               TextField(
                 controller: txtLogradouroController,
+                decoration: InputDecoration(labelText: 'Rua'),
+                
               ),
               TextField(
                 controller: txtBairroController,
+                decoration: InputDecoration(labelText: 'Bairro'),
               ),
               TextField(
                 controller: txtCidadeController,
+                decoration: InputDecoration(labelText: 'Cidade'),
               ),
               TextField(
                 controller: txtEstadoController,
+                decoration: InputDecoration(labelText: 'Estado'),
               ),
               TextField(
                 keyboardType: TextInputType.number,
