@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:japas_food/View/carrinho.view.dart';
 import 'package:japas_food/View/perfil.view.dart';
 
 
@@ -22,6 +23,7 @@ class App extends StatelessWidget {
         '/perfil': (context) => PerfilView(),
         '/cadastro': (context) => CadastroView(),
         '/menu': (context) => MenuView(),
+        '/carrinho': (context) => CarrinhoView()
       },
       initialRoute: auth.currentUser == null ? '/' : '/menu'
     );
