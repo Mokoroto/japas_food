@@ -28,36 +28,6 @@ class _PerfilViewState extends State<PerfilView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: const <BottomNavigationBarItem>[
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.menu),
-      //        label: 'Cardápio',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.account_circle_sharp),
-      //        label: 'Perfil',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.add_home_sharp),
-      //        label: 'Endereco',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.logout),
-      //        label: 'Sair',
-      //     ),
-      //   ],
-      //   unselectedItemColor: Colors.black,
-      //   selectedItemColor: Colors.amber[900],
-      //   selectedFontSize: 20,
-      //   unselectedFontSize: 16,
-      //   currentIndex: _selectedIndex,
-      //   onTap: _onTappedItem,
-      // ),
-      // appBar: AppBar(
-      //   title: const Text("Perfil"),
-
-      // ),
       body: Column(
         children: [
           StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(

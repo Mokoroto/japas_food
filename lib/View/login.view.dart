@@ -76,33 +76,32 @@ class _LogarState extends State<LoginView> {
                   ),
                   ElevatedButton(
                     child: Text('Entrar'),
-                    onPressed: () {
-
+                    onPressed: () async {
                       // login(String email, String senha) async {
-                        try {
-                      print(email);
-                      print(senha);
-                          auth.signInWithEmailAndPassword(
-                              email: email, password: senha);
+                      try {
+                        print(email);
+                        print(senha);
+                        await auth.signInWithEmailAndPassword(
+                            email: email, password: senha);
 
-                          Navigator.of(context).pushNamed('/menu');
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'user-not-found') {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                    'Usuário não foi encontrado. Por favor realize o cadastro'),
-                              ),
-                            );
-                          } else if (e.code == 'wrong-password') {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                    'Email ou senha incorretos! Tente novamente.'),
-                              ),
-                            );
-                          }
+                        Navigator.of(context).pushNamed('/menu');
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'user-not-found') {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                  'Usuário não foi encontrado. Por favor realize o cadastro'),
+                            ),
+                          );
+                        } else if (e.code == 'wrong-password') {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                  'Email ou senha incorretos! Tente novamente.'),
+                            ),
+                          );
                         }
+                      }
                       // }
                     },
                   ),
